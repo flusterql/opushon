@@ -6,7 +6,7 @@ This document extend HTML by defining a format for response body of HTTP OPTIONS
 
 ## Note to Readers
 
-This draft should be discussed on [this page](https://gist.github.com/cyril/f3a2ad2cb9826fcb1db6).
+This draft should be discussed on [this page](https://github.com/cyril/opushon/blob/master/README.md).
 
 ## Status of This Document
 
