@@ -42,22 +42,26 @@ When serialised as a JSON document, that format SHOULD be identified with the "a
 
 Considering a response having the following header:
 
-    Allow: GET,HEAD,PUT,OPTIONS
+```
+Allow: GET,HEAD,PUT,OPTIONS
+```
 
 Its body could look like:
 
-    {
-      "GET": {
-        "description": "Get the resource",
-        "parameters": {list the gettable attributes (response body)},
-        "example": {example of representation}
-      },
-      "PATCH": {
-        "description": "Update the resource",
-        "parameters": {list the patchable attributes (request body)},
-        "example": {example of representation}
-      }
-    }
+```
+{
+  "GET": {
+    "description": "Get the resource",
+    "parameters": {list the gettable attributes (response body)},
+    "example": {example of representation of such response body}
+  },
+  "PATCH": {
+    "description": "Update the resource",
+    "parameters": {list the patchable attributes (request body)},
+    "example": {example of representation of such request body}
+  }
+}
+```
 
 The body structure MUST be a hash where each key is a HTTP method (in uppercase) and each value is a sub-hash composed by the sub-keys below. When a sub-key is missing, its default value is assigned.
 
