@@ -4,9 +4,9 @@
 
 This document extend HTML by defining a format for response body of HTTP OPTIONS.
 
-## Note to Readers
+## Feedback
 
-This draft should be discussed on [this page](https://github.com/cyril/opushon/blob/master/README.md).
+This is a work in progress. Real world usage and feedback are welcome. Please feel free to use GitHub Issues to make suggestions or fire up a Pull Request with changes to be reviewed. Thank you!
 
 ## Status of This Document
 
