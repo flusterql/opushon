@@ -40,7 +40,7 @@ When serialised as a JSON document, that format SHOULD be identified with the "a
 
 ## Structure of the document
 
-The body structure is a hash, where each key is a HTTP method (in uppercase) and each value is a sub-hash composed of the key below:
+The body structure MUST be a hash where each key is a HTTP method (in uppercase) and each value is a sub-hash composed by the sub-keys below. When a sub-key is missing, its default value is assigned.
 
 ### `title`
 
