@@ -6,7 +6,11 @@ This document extend HTML by defining a format for response body of HTTP OPTIONS
 
 ## Feedback
 
-This is a work in progress. Real world usage and feedback are welcome. Please feel free to use GitHub Issues to make suggestions or fire up a Pull Request with changes to be reviewed. Thank you!
+Real world usage and feedback are welcome. Please feel free to use GitHub Issues to make suggestions or fire up a Pull Request with changes to be reviewed. Thank you!
+
+## About
+
+This is a work in progress, largely influenced by [Zac Stewart](https://github.com/zacstewart)'s [The HTTP OPTIONS method and potential for self-describing RESTful APIs](http://zacstewart.com/2012/04/14/http-options-method.html) article.
 
 ## Status of This Document
 
