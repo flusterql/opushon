@@ -47,7 +47,7 @@ When serialised as a JSON document, that format SHOULD be identified with the "a
 Considering a response having the following header:
 
 ```
-Allow: GET,HEAD,PUT,OPTIONS
+Allow: GET,HEAD,PATCH,OPTIONS
 ```
 
 Its body could look like:
