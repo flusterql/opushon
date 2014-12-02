@@ -206,7 +206,7 @@ Additional attributes:
 
 * type: MUST be a number.
 * null: MUST allow `null` as a value.
-* default value: MUST be `null`.
+* default value: MUST be `1`.
 
 ### Boolean
 
