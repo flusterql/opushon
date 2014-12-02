@@ -50,6 +50,8 @@ Considering a response having the following header:
 Allow: GET,HEAD,PATCH,OPTIONS
 ```
 
+The body structure MUST be a hash where each key is a HTTP method (in uppercase) and each value is a sub-hash, called an _option_ object.
+
 Its body could look like:
 
 ```
@@ -67,7 +69,7 @@ Its body could look like:
 }
 ```
 
-The body structure MUST be a hash where each key is a HTTP method (in uppercase) and each value is a sub-hash composed by the sub-keys below. When a sub-key is missing, its default value is assigned.
+An option object MAY have the following members:
 
 ### `title`
 
