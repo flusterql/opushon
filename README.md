@@ -2,7 +2,7 @@
 
 ## Abstract
 
-This document extend HTML by defining a format for response body of HTTP OPTIONS.
+This document extend HTTP by defining a format for response body of HTTP OPTIONS.
 
 ## Feedback
 
