@@ -140,9 +140,11 @@ Both **query string** and **parameter** attributes MUST be described with the ke
 
 ### `default`
 
-* type: MUST be `null`.
+* type: depends of the value of the `type` property.
 * null: MUST allow `null` as a value.
-* default value: SHOULD be `null`.
+* default value: depends of the value of the `type` property.
+
+Constraint validation: if its value is `null`, the value of `nullifiable` property MUST be `true`.
 
 ## Special cases
 
