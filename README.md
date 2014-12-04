@@ -122,9 +122,9 @@ Both **query string** and **parameter** attributes MUST be described with the ke
 ### `type`
 
 * type: MUST be a string.
-* null: MUST allow `null` as a value.
-* default value: MUST be `null`.
-* options: SHOULD have one of the values: "`string`", "`number`", "`boolean`".
+* null: MUST NOT allow `null` as a value.
+* default value: MUST be `string`.
+* options: MUST include the values: "`string`", "`number`", "`boolean`".
 
 ### `description`
 
