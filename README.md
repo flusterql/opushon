@@ -156,13 +156,13 @@ Considering an attribute having the type: `"string"`.
 
 * default value: MUST be `""`.
 
-#### `minlen`:
+#### `minlen`
 
 * type: MUST be a number.
 * null: MUST allow `null` as a value.
 * default value: MUST be `null`.
 
-#### `maxlen`:
+#### `maxlen`
 
 * type: MUST be a number.
 * null: MUST allow `null` as a value.
@@ -170,7 +170,7 @@ Considering an attribute having the type: `"string"`.
 
 Constraint validation: if minlen and maxlen are present and their values are both not null, then the value of minlen MUST be less than the value of maxlen.
 
-#### `pattern`:
+#### `pattern`
 
 The pattern attribute specifies a regular expression against which the control's value, or, when the multiple attribute applies and is set, the control's values, are to be checked.
 
@@ -190,19 +190,19 @@ Considering an attribute having the type: `"number"`.
 
 Additional attributes:
 
-#### `min`:
+#### `min`
 
 * type: MUST be a number.
 * null: MUST allow `null` as a value.
 * default value: MUST be `null`.
 
-#### `max`:
+#### `max`
 
 * type: MUST be a number.
 * null: MUST allow `null` as a value.
 * default value: MUST be `null`.
 
-#### `step`:
+#### `step`
 
 * type: MUST be a number.
 * null: MUST allow `null` as a value.
