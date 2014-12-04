@@ -214,6 +214,18 @@ The `step` attribute, if specified, MUST either have a value that is a valid flo
 
 Constraint validation: if `step` is not `null`, at least `min` or `max` MUST also be not `null`.
 
+##### Example
+
+The following range control only accepts values in the range 0..1, and allows 256 steps in that range:
+
+```json
+{
+    "min": 0,
+    "max": 1,
+    "step": 0.00392156863
+}
+```
+
 ### Boolean
 
 Considering an attribute having the type: `"boolean"`.
