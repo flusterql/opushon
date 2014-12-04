@@ -204,9 +204,15 @@ Additional attributes:
 
 #### `step`
 
+The `step` attribute indicates the granularity that is expected (and required) of the value, by limiting the allowed values.
+
+The `step` attribute, if specified, MUST either have a value that is a valid floating-point number that parses to a number that is greater than zero, or MUST have the `null` value.
+
 * type: MUST be a number.
 * null: MUST allow `null` as a value.
-* default value: MUST be `1`.
+* default value: MUST be `null`.
+
+Constraint validation: if `step` is not `null`, at least `min` or `max` MUST also be not `null`.
 
 ### Boolean
 
