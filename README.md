@@ -134,7 +134,7 @@ Both **query string** and **parameter** attributes MUST be described with the ke
 
 ### `options`
 
-* type: MUST be an array.
+* type: MUST be a hash.
 * null: MUST allow `null` as a value.
 * default value: MUST be `null`.
 
