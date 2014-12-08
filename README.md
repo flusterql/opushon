@@ -69,37 +69,15 @@ Its body could look like:
 }
 ```
 
-An option object MAY have the following members:
+An option object MUST have the following members:
 
-### `title`
-
-* type: MUST be a string.
-* null: MUST NOT allow `null` as a value.
-* default value: MUST be `""`.
-
-### `description`
-
-* type: MUST be a string.
-* null: MUST NOT allow `null` as a value.
-* default value: MUST be `""`.
-
-### `query_string`
-
-* type: MUST be a hash.
-* null: MUST NOT allow `null` as a value.
-* default value: MUST be `{}`.
-
-### `parameters`
-
-* type: MUST be a hash.
-* null: MUST NOT allow `null` as a value.
-* default value: MUST be `{}`.
-
-### `example`
-
-* type: MUST be a hash.
-* null: MUST allow `null` as a value.
-* default value: MUST be `null`.
+| Name           | Type   | Nullifiable? | Default value |
+| -------------- | ------ | ------------ | ------------- |
+| `title`        | string | false        | `""`          |
+| `description`  | hash   | false        | `""`          |
+| `query_string` | hash   | false        | `{}`          |
+| `parameters`   | hash   | false        | `{}`          |
+| `example`      |        | true         | `null`        |
 
 * * *
 
