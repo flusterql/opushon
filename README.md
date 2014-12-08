@@ -163,6 +163,14 @@ The following range control only accepts values in the range 0..1, and allows 25
 
 Default value: MUST be `false`.
 
+### Array value
+
+Default value: MUST be `[]`.
+
+### Hash value
+
+Default value: MUST be `{}`.
+
 ## Example
 
 For example, a HTTP request like `OPTIONS /issues` could respond with:
