@@ -101,11 +101,11 @@ Constraint validation: allowed values of `type` are:
 * `"array"`,
 * `"hash"`.
 
-## String values
+### String values
 
 Default value: MUST be `""`.
 
-### String length
+#### String length
 
 | Name     | Type   | Nullifiable? | Default value |
 | -------- | ------ | ------------ | ------------- |
@@ -114,7 +114,7 @@ Default value: MUST be `""`.
 
 Constraint validation: if minlen and maxlen are present and their values are both not null, then the value of minlen MUST be less than the value of maxlen.
 
-### String pattern
+#### String pattern
 
 The pattern attribute specifies a regular expression against which the control's value, or, when the multiple attribute applies and is set, the control's values, are to be checked.
 
@@ -124,18 +124,18 @@ If specified, the attribute's value MUST match the JavaScript Pattern production
 | --------- | ------ | ------------ | ------------- |
 | `pattern` | string | true         | `null`        |
 
-## Number values
+### Number values
 
 Default value: MUST be `0`.
 
-### Number range
+#### Number range
 
 | Name   | Type   | Nullifiable? | Default value |
 | ------ | ------ | ------------ | ------------- |
 | `min`  | number | true         | `null`        |
 | `max`  | number | true         | `null`        |
 
-#### Range step
+##### Range step
 
 The `step` attribute indicates the granularity that is expected (and required) of the value, by limiting the allowed values.
 
@@ -147,7 +147,7 @@ The `step` attribute, if specified, MUST either have a value that is a valid flo
 
 Constraint validation: if `step` is not `null`, at least `min` or `max` MUST also be not `null`.
 
-##### Example
+###### Example
 
 The following range control only accepts values in the range 0..1, and allows 256 steps in that range:
 
@@ -159,13 +159,9 @@ The following range control only accepts values in the range 0..1, and allows 25
 }
 ```
 
-### Boolean
+### Boolean value
 
-Considering an attribute having the type: `"boolean"`.
-
-#### `default`
-
-* default value: MUST be `false`.
+Default value: MUST be `false`.
 
 ## Example
 
@@ -173,7 +169,7 @@ For example, a HTTP request like `OPTIONS /issues` could respond with:
 
 ```
 HTTP/1.1 200 OK
-Allow: OPTIONS,GET,HEAD,POST,DELETE
+Allow: OPTIONS,HEAD,GET,POST,DELETE
 Content-Type: application/json
 Content-Language: en
 ```
