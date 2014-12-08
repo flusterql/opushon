@@ -47,7 +47,7 @@ When serialised as a JSON document, that format SHOULD be identified with the "a
 Considering a response having the following header:
 
 ```
-Allow: GET,HEAD,PATCH,OPTIONS
+Allow: OPTIONS,GET,HEAD,PATCH
 ```
 
 The body structure MUST be a hash where each key is a HTTP method (in uppercase) and each value is a sub-hash, called an _option_ object.
@@ -242,7 +242,7 @@ For example, a HTTP request like `OPTIONS /issues` could respond with:
 
 ```
 HTTP/1.1 200 OK
-Allow: OPTIONS,HEAD,GET,POST,DELETE
+Allow: OPTIONS,GET,HEAD,POST,DELETE
 Content-Type: application/json
 Content-Language: en
 ```
