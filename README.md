@@ -117,7 +117,7 @@ Constraint validation: if minlen and maxlen are present and their values are bot
 
 The pattern attribute specifies a regular expression against which the control's value, or, when the multiple attribute applies and is set, the control's values, are to be checked.
 
-If specified, the attribute's value MUST match the JavaScript Pattern production. [ECMA262]
+If specified, the attribute's value MUST match the JavaScript Pattern production. [[ECMA262](http://www.ecma-international.org/ecma-262/5.1/)]
 
 | Name      | Type   | Nullifiable? | Default value |
 | --------- | ------ | ------------ | ------------- |
