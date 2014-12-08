@@ -91,7 +91,6 @@ Both **query string** and **parameter** attributes MUST be described with the ke
 | `multiple`     | boolean | false        | `false`       |
 | `type`         | string  | false        | `"string"`    |
 | `description`  | string  | false        | `""`          |
-| `options`      | hash    | true         | `null`        |
 
 Constraint validation: allowed values of `type` are:
 
@@ -123,6 +122,14 @@ If specified, the attribute's value MUST match the JavaScript Pattern production
 | Name      | Type   | Nullifiable? | Default value |
 | --------- | ------ | ------------ | ------------- |
 | `pattern` | string | true         | `null`        |
+
+#### String options
+
+The options allow to select a value between several possible values.
+
+| Name      | Type | Nullifiable? | Default value |
+| --------- | ---- | ------------ | ------------- |
+| `options` | hash | true         | `null`        |
 
 ### Number values
 
