@@ -2,7 +2,7 @@
 
 ## Abstract
 
-This document extend HTTP by defining a format for response body of HTTP OPTIONS.
+This document extend HTTP by defining through the HTTP OPTIONS method a structure for response body that include information about the communication options, to determine the options and/or requirements associated with a resource.
 
 ## Feedback
 
