@@ -85,112 +85,65 @@ An option object MUST have the following members:
 
 Both **query string** and **parameter** attributes MUST be described with the keys below. When a key is missing, its default value is assigned.
 
-### `nullifiable`
+| Name           | Type    | Nullifiable? | Default value |
+| -------------- | ------- | ------------ | ------------- |
+| `nullifiable`  | boolean | false        | `true`        |
+| `multiple`     | boolean | false        | `false`       |
+| `type`         | string  | false        | `"string"`    |
+| `description`  | string  | false        | `""`          |
+| `options`      | hash    | true         | `null`        |
 
-* type: MUST be a boolean.
-* null: MUST NOT allow `null` as a value.
-* default value: MUST be `true`.
+Constraint validation: allowed values of `type` are:
 
-### `multiple`
+* `"string"`,
+* `"number"`,
+* `"boolean"`,
+* `"array"`,
+* `"hash"`.
 
-* type: MUST be a boolean.
-* null: MUST NOT allow `null` as a value.
-* default value: MUST be `false`.
+## String values
 
-### `type`
+Default value: MUST be `""`.
 
-* type: MUST be a string.
-* null: MUST NOT allow `null` as a value.
-* default value: MUST be `string`.
-* options: MUST include the values: "`string`", "`number`", "`boolean`".
+### String length
 
-### `description`
-
-* type: MUST be a string.
-* null: MUST NOT allow `null` as a value.
-* default value: MUST be `""`.
-
-### `options`
-
-* type: MUST be a hash.
-* null: MUST allow `null` as a value.
-* default value: MUST be `null`.
-
-### `default`
-
-* type: depends of the value of the `type` property.
-* null: MUST allow `null` as a value.
-* default value: depends of the value of the `type` property.
-
-Constraint validation: if its value is `null`, the value of `nullifiable` property MUST be `true`.
-
-## Special cases
-
-Depending on the different types, some attributes can be added and some values can be overridden.
-
-### String
-
-Considering an attribute having the type: `"string"`.
-
-#### `default`
-
-* default value: MUST be `""`.
-
-#### `minlen`
-
-* type: MUST be a number.
-* null: MUST allow `null` as a value.
-* default value: MUST be `null`.
-
-#### `maxlen`
-
-* type: MUST be a number.
-* null: MUST allow `null` as a value.
-* default value: MUST be `null`.
+| Name     | Type   | Nullifiable? | Default value |
+| -------- | ------ | ------------ | ------------- |
+| `minlen` | number | true         | `null`        |
+| `maxlen` | number | true         | `null`        |
 
 Constraint validation: if minlen and maxlen are present and their values are both not null, then the value of minlen MUST be less than the value of maxlen.
 
-#### `pattern`
+### String pattern
 
 The pattern attribute specifies a regular expression against which the control's value, or, when the multiple attribute applies and is set, the control's values, are to be checked.
 
 If specified, the attribute's value MUST match the JavaScript Pattern production. [ECMA262]
 
-* type: MUST be a string.
-* null: MUST allow `null` as a value.
-* default value: MUST be `null`.
+| Name      | Type   | Nullifiable? | Default value |
+| --------- | ------ | ------------ | ------------- |
+| `pattern` | string | true         | `null`        |
 
-### Number
+## Number values
 
-Considering an attribute having the type: `"number"`.
+Default value: MUST be `0`.
 
-#### `default`
+### Number range
 
-* default value: MUST be `0`.
+| Name   | Type   | Nullifiable? | Default value |
+| ------ | ------ | ------------ | ------------- |
+| `min`  | number | true         | `null`        |
+| `max`  | number | true         | `null`        |
 
-Additional attributes:
-
-#### `min`
-
-* type: MUST be a number.
-* null: MUST allow `null` as a value.
-* default value: MUST be `null`.
-
-#### `max`
-
-* type: MUST be a number.
-* null: MUST allow `null` as a value.
-* default value: MUST be `null`.
-
-#### `step`
+#### Range step
 
 The `step` attribute indicates the granularity that is expected (and required) of the value, by limiting the allowed values.
 
 The `step` attribute, if specified, MUST either have a value that is a valid floating-point number that parses to a number that is greater than zero, or MUST have the `null` value.
 
-* type: MUST be a number.
-* null: MUST allow `null` as a value.
-* default value: MUST be `null`.
+| Name   | Type   | Nullifiable? | Default value |
+| ------ | ------ | ------------ | ------------- |
+| `step` | number | true         | `null`        |
 
 Constraint validation: if `step` is not `null`, at least `min` or `max` MUST also be not `null`.
 
