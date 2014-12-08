@@ -58,13 +58,13 @@ Its body could look like:
 {
   "GET": {
     "description": "Get the resource",
-    "parameters": {list the gettable attributes (response body)},
-    "example": {example of representation of such response body}
+    "parameters": (list the gettable attributes (response body)),
+    "example": (example of representation of such response body)
   },
   "PATCH": {
     "description": "Update the resource",
-    "parameters": {list the patchable attributes (request body)},
-    "example": {example of representation of such request body}
+    "parameters": (list the patchable attributes (request body)),
+    "example": (example of representation of such request body)
   }
 }
 ```
@@ -91,8 +91,12 @@ Both **query string** and **parameter** attributes MUST be described with the ke
 | `multiple`     | boolean | false        | `false`       |
 | `type`         | string  | false        | `"string"`    |
 | `description`  | string  | false        | `""`          |
+| `examples`     | array   | false        | `[]`          |
+| `strict`       | boolean | false        | `false`       |
 
-Note: if `multiple` key is true, the value of its attribute MUST be an array that contains the values (of the specified type), unless the value is nullifiable and nullified.
+Note 1: if the `multiple` key is true, more than one value can be included inside an array (where each item belongs to the specified type), unless the value is nullifiable and nullified.
+
+Note 2: if the `strict` key is true, the value MUST be part of the listed examples (in `examples`).
 
 Constraint validation: allowed values of `type` are:
 
@@ -124,14 +128,6 @@ If specified, the attribute's value MUST match the JavaScript Pattern production
 | Name      | Type   | Nullifiable? | Default value |
 | --------- | ------ | ------------ | ------------- |
 | `pattern` | string | true         | `null`        |
-
-#### String options
-
-The options allow to select a value between several possible values.
-
-| Name      | Type | Nullifiable? | Default value |
-| --------- | ---- | ------------ | ------------- |
-| `options` | hash | true         | `null`        |
 
 ### Number values
 
@@ -180,6 +176,16 @@ Default value: MUST be `[]`.
 
 Default value: MUST be `{}`.
 
+### Structure of `examples` key
+
+Each example is an item that contains a hash with those params:
+
+| Name          | Type   | Nullifiable? | Default value |
+| ------------- | ------ | ------------ | ------------- |
+| `title`       | string | true         | `null`        |
+| `description` | string | true         | `null`        |
+| `value`       |        | false        |               |
+
 ## Example
 
 For example, a HTTP request like `OPTIONS /issues` could respond with:
@@ -213,11 +219,20 @@ Content-Language: en
             },
             "state": {
                 "description": "Indicates the state of the issues to return.",
-                "options": {
-                    "open": "Open",
-                    "closed": "Closed",
-                    "all": "All"
-                },
+                "examples": [
+                    {
+                        "value": "open",
+                        "title": "Open"
+                    },
+                    {
+                        "value": "closed",
+                        "title": "Closed"
+                    },
+                    {
+                        "value": "all",
+                        "title": "All"
+                    }
+                ],
                 "default": "open",
                 "multiple": true,
                 "nullifiable": true
@@ -245,11 +260,20 @@ Content-Language: en
                 "type": "string",
                 "description": "Indicates the state of the issue.",
                 "maxlen": 255,
-                "options": {
-                    "open": "Open",
-                    "closed": "Closed",
-                    "all": "All"
-                },
+                "examples": [
+                    {
+                        "value": "open",
+                        "title": "Open"
+                    },
+                    {
+                        "value": "closed",
+                        "title": "Closed"
+                    },
+                    {
+                        "value": "all",
+                        "title": "All"
+                    }
+                ],
                 "multiple": false,
                 "nullifiable": false
             }
@@ -284,11 +308,20 @@ Content-Language: en
                 "description": "Labels to associate with this issue.",
                 "multiple": true,
                 "nullifiable": true,
-                "options": {
-                    "label_1": "Java",
-                    "label_2": "Ruby",
-                    "label_3": "Elixir"
-                }
+                "examples": [
+                    {
+                        "value": "label_1",
+                        "title": "Java"
+                    },
+                    {
+                        "value": "label_2",
+                        "title": "Ruby"
+                    },
+                    {
+                        "value": "label_3",
+                        "title": "Elixir"
+                    }
+                ]
             }
         },
         "example": {
