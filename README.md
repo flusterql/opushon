@@ -6,7 +6,7 @@ This document extend HTTP by defining through the HTTP OPTIONS method a structur
 
 ## Feedback
 
-Real world usage and feedback are welcome. Please feel free to use GitHub Issues to make suggestions or fire up a Pull Request with changes to be reviewed. Thank you!
+Real world usage and feedback are welcome. Please feel free to use [GitHub Issues](https://github.com/cyril/opushon/issues) to make suggestions or fire up a Pull Request with changes to be reviewed. Thank you!
 
 ## About
 
