@@ -92,6 +92,8 @@ Both **query string** and **parameter** attributes MUST be described with the ke
 | `type`         | string  | false        | `"string"`    |
 | `description`  | string  | false        | `""`          |
 
+Note: if `multiple` key is true, the value of its attribute MUST be an array that contains the values (of the specified type), unless the value is nullifiable and nullified.
+
 Constraint validation: allowed values of `type` are:
 
 * `"string"`,
