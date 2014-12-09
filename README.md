@@ -144,30 +144,6 @@ If specified, the attribute's value MUST match the JavaScript Pattern production
 | `min`  | number | true         | `null`        |
 | `max`  | number | true         | `null`        |
 
-##### Range step
-
-The `step` attribute indicates the granularity that is expected (and required) of the value, by limiting the allowed values.
-
-The `step` attribute, if specified, MUST either have a value that is a valid floating-point number that parses to a number that is greater than zero, or MUST have the `null` value.
-
-| Name   | Type   | Nullifiable? | Default value |
-| ------ | ------ | ------------ | ------------- |
-| `step` | number | true         | `null`        |
-
-Constraint validation: if `step` is not `null`, at least `min` or `max` MUST also be not `null`.
-
-###### Example
-
-The following range control only accepts values in the range 0..1, and allows 256 steps in that range:
-
-```json
-{
-    "min": 0,
-    "max": 1,
-    "step": 0.00392156863
-}
-```
-
 ### Boolean value
 
 | Name      | Type    | Nullifiable? | Default value |
@@ -218,7 +194,6 @@ Content-Language: en
                 "description": "Identify the page to return.",
                 "min": 1,
                 "max": null,
-                "step": 1,
                 "default": 1
             },
             "per_page": {
@@ -226,7 +201,6 @@ Content-Language: en
                 "description": "Indicate the number of issues per page.",
                 "min": 1,
                 "max": 100,
-                "step": 1,
                 "default": 10
             },
             "state": {
