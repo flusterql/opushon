@@ -218,14 +218,16 @@ Content-Language: en
                 "description": "Identify the page to return.",
                 "min": 1,
                 "max": null,
-                "step": 1
+                "step": 1,
+                "default": 1
             },
             "per_page": {
                 "type": "number",
                 "description": "Indicate the number of issues per page.",
                 "min": 1,
                 "max": 100,
-                "step": 1
+                "step": 1,
+                "default": 10
             },
             "state": {
                 "description": "Indicates the state of the issues to return.",
