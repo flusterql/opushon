@@ -47,7 +47,7 @@ When serialised as a JSON document, that format SHOULD be identified with the "a
 Considering a response having the following header:
 
 ```
-Allow: OPTIONS,GET,HEAD,PATCH
+Allow: OPTIONS,HEAD,GET,PATCH
 ```
 
 The body structure MUST be a hash where each key is a HTTP method (in uppercase) and each value is a sub-hash, called an _option_ object.
@@ -56,47 +56,35 @@ Its body could look like:
 
 ```
 {
-  "GET": {
-    "description": "Get the resource",
-    "parameters": (list the gettable attributes (response body)),
-    "example": (example of representation of such response body)
-  },
-  "PATCH": {
-    "description": "Update the resource",
-    "parameters": (list the patchable attributes (request body)),
-    "example": (example of representation of such request body)
-  }
+  "GET":   ( options and/or requirements associated with the resource ),
+  "PATCH": ( options and/or requirements associated with the resource )
 }
 ```
 
 An option object MUST have the following members:
 
-| Name           | Type   | Nullifiable? | Default value |
-| -------------- | ------ | ------------ | ------------- |
-| `title`        | string | false        | `""`          |
-| `description`  | hash   | false        | `""`          |
-| `query_string` | hash   | false        | `{}`          |
-| `parameters`   | hash   | false        | `{}`          |
-| `example`      |        | true         | `null`        |
+| Name          | Type   | Nullifiable? | Default value |
+| ------------- | ------ | ------------ | ------------- |
+| `title`       | string | false        | `""`          |
+| `description` | string | true         | `null`        |
+| `input`       | hash   | true         | `null`        |
+| `output`      | hash   | true         | `null`        |
+| `example`     |        | true         | `null`        |
 
 * * *
 
 ## Attributes
 
-Both **query string** and **parameter** attributes MUST be described with the keys below. When a key is missing, its default value is assigned.
+Both **query string** and **body** params MUST be described with the keys below. When a key is missing, its default value is assigned.
 
-| Name           | Type    | Nullifiable? | Default value |
-| -------------- | ------- | ------------ | ------------- |
-| `nullifiable`  | boolean | false        | `true`        |
-| `multiple`     | boolean | false        | `false`       |
-| `type`         | string  | false        | `"string"`    |
-| `description`  | string  | false        | `""`          |
-| `examples`     | array   | false        | `[]`          |
-| `strict`       | boolean | false        | `false`       |
-
-Note 1: if the `multiple` key is true, more than one value can be included inside an array (where each item belongs to the specified type), unless the value is nullifiable and nullified.
-
-Note 2: if the `strict` key is true, the value MUST be part of the listed examples (in `examples`).
+| Name                | Type    | Nullifiable? | Default value |
+| ------------------- | ------- | ------------ | ------------- |
+| `title`             | string  | false        | `""`          |
+| `description`       | string  | true         | `null`        |
+| `type`              | string  | false        | `"string"`    |
+| `nullifiable`       | boolean | false        | `true`        |
+| `query_string`      | boolean | false        | `true`        |
+| `restricted_values` | array   | true         | `null`        |
 
 Constraint validation: allowed values of `type` are:
 
@@ -106,11 +94,7 @@ Constraint validation: allowed values of `type` are:
 * `"array"`,
 * `"hash"`.
 
-### String values
-
-| Name      | Type   | Nullifiable? | Default value |
-| --------- | ------ | ------------ | ------------- |
-| `default` | string |              | `""`          |
+### Input Constraints
 
 #### String length
 
@@ -123,19 +107,13 @@ Constraint validation: if minlen and maxlen are present and their values are bot
 
 #### String pattern
 
-The pattern attribute specifies a regular expression against which the control's value, or, when the multiple attribute applies and is set, the control's values, are to be checked.
+The pattern attribute specifies a regular expression against which the control's value.
 
 If specified, the attribute's value MUST match the JavaScript Pattern production. [[ECMA262](http://www.ecma-international.org/ecma-262/5.1/)]
 
 | Name      | Type   | Nullifiable? | Default value |
 | --------- | ------ | ------------ | ------------- |
 | `pattern` | string | true         | `null`        |
-
-### Number values
-
-| Name      | Type   | Nullifiable? | Default value |
-| --------- | ------ | ------------ | ------------- |
-| `default` | number |              | `0`           |
 
 #### Number range
 
@@ -144,31 +122,13 @@ If specified, the attribute's value MUST match the JavaScript Pattern production
 | `min`  | number | true         | `null`        |
 | `max`  | number | true         | `null`        |
 
-### Boolean value
+### Structure of `restricted_values` key
 
-| Name      | Type    | Nullifiable? | Default value |
-| --------- | ------- | ------------ | ------------- |
-| `default` | boolean |              | `false`       |
-
-### Array value
-
-| Name      | Type  | Nullifiable? | Default value |
-| --------- | ----- | ------------ | ------------- |
-| `default` | array |              | `[]`          |
-
-### Hash value
-
-| Name      | Type | Nullifiable? | Default value |
-| --------- | ---- | ------------ | ------------- |
-| `default` | hash |              | `{}`          |
-
-### Structure of `examples` key
-
-Each example is an item that contains a hash with those params:
+If present, the value of `restricted_values` is an array where each item contains a hash with those params:
 
 | Name          | Type   | Nullifiable? | Default value |
 | ------------- | ------ | ------------ | ------------- |
-| `title`       | string | true         | `null`        |
+| `title`       | string | false        | `""`          |
 | `description` | string | true         | `null`        |
 | `value`       |        | false        |               |
 
@@ -188,24 +148,22 @@ Content-Language: en
     "GET": {
         "title": "List issues",
         "description": "List all issues across all the authenticated user's visible repositories.",
-        "query_string": {
+        "input": {
             "page": {
                 "type": "number",
                 "description": "Identify the page to return.",
                 "min": 1,
-                "max": null,
-                "default": 1
+                "max": null
             },
             "per_page": {
                 "type": "number",
                 "description": "Indicate the number of issues per page.",
                 "min": 1,
-                "max": 100,
-                "default": 10
+                "max": 100
             },
             "state": {
                 "description": "Indicates the state of the issues to return.",
-                "examples": [
+                "restricted_values": [
                     {
                         "value": "open",
                         "title": "Open"
@@ -219,12 +177,10 @@ Content-Language: en
                         "title": "All"
                     }
                 ],
-                "default": "open",
-                "multiple": true,
                 "nullifiable": true
             }
         },
-        "parameters": {
+        "output": {
             "created_at": {
                 "type": "string",
                 "description": "The datetime that the resource was created at.",
@@ -233,20 +189,17 @@ Content-Language: en
             "title": {
                 "type": "string",
                 "description": "The title of the resource.",
-                "maxlen": 255,
                 "nullifiable": false
             },
             "body": {
                 "type": "string",
                 "description": "The body of the resource.",
-                "maxlen": 10000,
                 "nullifiable": true
             },
             "state": {
                 "type": "string",
                 "description": "Indicates the state of the issue.",
-                "maxlen": 255,
-                "examples": [
+                "restricted_values": [
                     {
                         "value": "open",
                         "title": "Open"
@@ -260,7 +213,6 @@ Content-Language: en
                         "title": "All"
                     }
                 ],
-                "multiple": false,
                 "nullifiable": false
             }
         },
@@ -276,25 +228,26 @@ Content-Language: en
     "POST": {
         "title": "Create an issue",
         "description": "Any user with pull access to a repository can create an issue.",
-        "query_string": {},
-        "parameters": {
+        "input": {
             "title": {
+                "query_string": false,
                 "type": "string",
                 "description": "Issue title.",
                 "maxlen": 255,
                 "nullifiable": false
             },
             "body": {
+                "query_string": false,
                 "type": "string",
                 "description": "Issue body.",
                 "nullifiable": true
             },
             "labels": {
+                "query_string": false,
                 "type": "string",
                 "description": "Labels to associate with this issue.",
-                "multiple": true,
                 "nullifiable": true,
-                "examples": [
+                "restricted_values": [
                     {
                         "value": "label_1",
                         "title": "Java"
