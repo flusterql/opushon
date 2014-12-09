@@ -108,7 +108,9 @@ Constraint validation: allowed values of `type` are:
 
 ### String values
 
-Default value: MUST be `""`.
+| Name      | Type   | Nullifiable? | Default value |
+| --------- | ------ | ------------ | ------------- |
+| `default` | string |              | `""`          |
 
 #### String length
 
@@ -131,7 +133,9 @@ If specified, the attribute's value MUST match the JavaScript Pattern production
 
 ### Number values
 
-Default value: MUST be `0`.
+| Name      | Type   | Nullifiable? | Default value |
+| --------- | ------ | ------------ | ------------- |
+| `default` | number |              | `0`           |
 
 #### Number range
 
@@ -166,15 +170,21 @@ The following range control only accepts values in the range 0..1, and allows 25
 
 ### Boolean value
 
-Default value: MUST be `false`.
+| Name      | Type    | Nullifiable? | Default value |
+| --------- | ------- | ------------ | ------------- |
+| `default` | boolean |              | `false`       |
 
 ### Array value
 
-Default value: MUST be `[]`.
+| Name      | Type  | Nullifiable? | Default value |
+| --------- | ----- | ------------ | ------------- |
+| `default` | array |              | `[]`          |
 
 ### Hash value
 
-Default value: MUST be `{}`.
+| Name      | Type | Nullifiable? | Default value |
+| --------- | ---- | ------------ | ------------- |
+| `default` | hash |              | `{}`          |
 
 ### Structure of `examples` key
 
