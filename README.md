@@ -83,7 +83,6 @@ Both **query string** and **body** params MUST be described with the keys below.
 | `description`       | string  | true         | `null`        |
 | `type`              | string  | false        | `"string"`    |
 | `nullifiable`       | boolean | false        | `true`        |
-| `query_string`      | boolean | false        | `true`        |
 | `restricted_values` | array   | true         | `null`        |
 
 Constraint validation: allowed values of `type` are:
@@ -95,6 +94,10 @@ Constraint validation: allowed values of `type` are:
 * `"hash"`.
 
 ### Input Constraints
+
+| Name           | Type    | Nullifiable? | Default value |
+| -------------- | ------- | ------------ | ------------- |
+| `query_string` | boolean | false        | `true`        |
 
 #### String length
 
