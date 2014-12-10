@@ -66,14 +66,27 @@ An option object MUST have the following members:
 | Name          | Type   | Nullifiable? | Default value |
 | ------------- | ------ | ------------ | ------------- |
 | `title`       | string | false        | `""`          |
-| `description` | string | true         | `null`        |
-| `input`       | hash   | true         | `null`        |
-| `output`      | hash   | true         | `null`        |
-| `example`     |        | true         | `null`        |
+| `description` | string | false        | `""`          |
+| `parameters`  | hash   | false        | `{}`          |
+| `examples`    | hash   | false        | `{}`          |
+
+Where `parameters` is such as:
+
+| Name     | Type | Nullifiable? | Default value |
+| -------- | ---- | ------------ | ------------- |
+| `input`  | hash | true         | `null`        |
+| `output` | hash | true         | `null`        |
+
+And where `examples` is such as:
+
+| Name     | Type | Nullifiable? | Default value |
+| -------- | ---- | ------------ | ------------- |
+| `input`  |      | true         | `null`        |
+| `output` |      | true         | `null`        |
 
 * * *
 
-## Attributes
+## Parameters
 
 Both **query string** and **body** params MUST be described with the keys below. When a key is missing, its default value is assigned.
 
@@ -151,136 +164,159 @@ Content-Language: en
     "GET": {
         "title": "List issues",
         "description": "List all issues across all the authenticated user's visible repositories.",
-        "input": {
-            "page": {
-                "type": "number",
-                "description": "Identify the page to return.",
-                "min": 1,
-                "max": null
+        "parameters": {
+            "input": {
+                "page": {
+                    "type": "number",
+                    "description": "Identify the page to return.",
+                    "min": 1,
+                    "max": null
+                },
+                "per_page": {
+                    "type": "number",
+                    "description": "Indicate the number of issues per page.",
+                    "min": 1,
+                    "max": 100
+                },
+                "state": {
+                    "description": "Indicates the state of the issues to return.",
+                    "restricted_values": [
+                        {
+                            "value": "open",
+                            "title": "Open"
+                        },
+                        {
+                            "value": "closed",
+                            "title": "Closed"
+                        },
+                        {
+                            "value": "all",
+                            "title": "All"
+                        }
+                    ],
+                    "nullifiable": true
+                }
             },
-            "per_page": {
-                "type": "number",
-                "description": "Indicate the number of issues per page.",
-                "min": 1,
-                "max": 100
-            },
-            "state": {
-                "description": "Indicates the state of the issues to return.",
-                "restricted_values": [
-                    {
-                        "value": "open",
-                        "title": "Open"
-                    },
-                    {
-                        "value": "closed",
-                        "title": "Closed"
-                    },
-                    {
-                        "value": "all",
-                        "title": "All"
-                    }
-                ],
-                "nullifiable": true
+            "output": {
+                "created_at": {
+                    "type": "string",
+                    "description": "The datetime that the resource was created at.",
+                    "nullifiable": false
+                },
+                "title": {
+                    "type": "string",
+                    "description": "The title of the resource.",
+                    "nullifiable": false
+                },
+                "body": {
+                    "type": "string",
+                    "description": "The body of the resource.",
+                    "nullifiable": true
+                },
+                "state": {
+                    "type": "string",
+                    "description": "Indicates the state of the issue.",
+                    "restricted_values": [
+                        {
+                            "value": "open",
+                            "title": "Open"
+                        },
+                        {
+                            "value": "closed",
+                            "title": "Closed"
+                        },
+                        {
+                            "value": "all",
+                            "title": "All"
+                        }
+                    ],
+                    "nullifiable": false
+                }
             }
         },
-        "output": {
-            "created_at": {
-                "type": "string",
-                "description": "The datetime that the resource was created at.",
-                "nullifiable": false
-            },
-            "title": {
-                "type": "string",
-                "description": "The title of the resource.",
-                "nullifiable": false
-            },
-            "body": {
-                "type": "string",
-                "description": "The body of the resource.",
-                "nullifiable": true
-            },
-            "state": {
-                "type": "string",
-                "description": "Indicates the state of the issue.",
-                "restricted_values": [
-                    {
-                        "value": "open",
-                        "title": "Open"
-                    },
-                    {
-                        "value": "closed",
-                        "title": "Closed"
-                    },
-                    {
-                        "value": "all",
-                        "title": "All"
-                    }
-                ],
-                "nullifiable": false
-            }
-        },
-        "example": [
-            {
-                "created_at": "2014-01-01T01:01:01Z",
-                "title": "Found a bug",
-                "body": "I'm having a problem with this.",
-                "state": "open"
-            }
-        ]
+        "examples": {
+            "input": null,
+            "output": [
+                {
+                    "created_at": "2014-01-01T01:01:01Z",
+                    "title": "Found a bug",
+                    "body": "I'm having a problem with this.",
+                    "state": "open"
+                }
+            ]
+        }
     },
     "POST": {
         "title": "Create an issue",
         "description": "Any user with pull access to a repository can create an issue.",
-        "input": {
-            "title": {
-                "query_string": false,
-                "type": "string",
-                "description": "Issue title.",
-                "maxlen": 255,
-                "nullifiable": false
+        "parameters": {
+            "input": {
+                "title": {
+                    "query_string": false,
+                    "type": "string",
+                    "description": "Issue title.",
+                    "maxlen": 255,
+                    "nullifiable": false
+                },
+                "body": {
+                    "query_string": false,
+                    "type": "string",
+                    "description": "Issue body.",
+                    "nullifiable": true
+                },
+                "labels": {
+                    "query_string": false,
+                    "type": "string",
+                    "description": "Labels to associate with this issue.",
+                    "nullifiable": true,
+                    "restricted_values": [
+                        {
+                            "value": "label_1",
+                            "title": "Java"
+                        },
+                        {
+                            "value": "label_2",
+                            "title": "Ruby"
+                        },
+                        {
+                            "value": "label_3",
+                            "title": "Elixir"
+                        }
+                    ]
+                }
             },
-            "body": {
-                "query_string": false,
-                "type": "string",
-                "description": "Issue body.",
-                "nullifiable": true
-            },
-            "labels": {
-                "query_string": false,
-                "type": "string",
-                "description": "Labels to associate with this issue.",
-                "nullifiable": true,
-                "restricted_values": [
-                    {
-                        "value": "label_1",
-                        "title": "Java"
-                    },
-                    {
-                        "value": "label_2",
-                        "title": "Ruby"
-                    },
-                    {
-                        "value": "label_3",
-                        "title": "Elixir"
-                    }
-                ]
-            }
+            "output": null
         },
-        "example": {
-            "title": "Found a bug",
-            "body": "I'm having a problem with this.",
-            "labels": [
-                "label_1",
-                "label_2"
-            ]
+        "examples": {
+            "input": {
+                "title": "Found a bug",
+                "body": "I'm having a problem with this.",
+                "labels": [
+                    "label_1",
+                    "label_2"
+                ]
+            },
+            "output": null
         }
     },
     "DELETE": {
         "title": "Delete issues",
-        "description": "Remove every issues."
+        "description": "Remove every issues.",
+        "parameters": {
+            "input": null,
+            "output": null
+        },
+        "examples": {
+            "input": null,
+            "output": null
+        }
     }
 }
 ```
+
+## Limitations
+
+In input parameters, a query string parameter and a body parameter cannot have the same name because of the structure of data (which is a hash).
 
 ## References
 
