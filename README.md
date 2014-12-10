@@ -93,7 +93,7 @@ Both **query string** and **body** params MUST be described with the keys below.
 | Name                | Type    | Nullifiable? | Default value |
 | ------------------- | ------- | ------------ | ------------- |
 | `title`             | string  | false        | `""`          |
-| `description`       | string  | true         | `null`        |
+| `description`       | string  | false        | `""`          |
 | `type`              | string  | false        | `"string"`    |
 | `nullifiable`       | boolean | false        | `true`        |
 
@@ -119,7 +119,7 @@ If present, the value of `restricted_values` is an array where each item contain
 | Name          | Type   | Nullifiable? | Default value |
 | ------------- | ------ | ------------ | ------------- |
 | `title`       | string | false        | `""`          |
-| `description` | string | true         | `null`        |
+| `description` | string | false        | `""`          |
 | `value`       |        | false        |               |
 
 #### String length
