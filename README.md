@@ -96,7 +96,6 @@ Both **query string** and **body** params MUST be described with the keys below.
 | `description`       | string  | true         | `null`        |
 | `type`              | string  | false        | `"string"`    |
 | `nullifiable`       | boolean | false        | `true`        |
-| `restricted_values` | array   | true         | `null`        |
 
 Constraint validation: allowed values of `type` are:
 
@@ -108,9 +107,20 @@ Constraint validation: allowed values of `type` are:
 
 ### Input Constraints
 
-| Name           | Type    | Nullifiable? | Default value |
-| -------------- | ------- | ------------ | ------------- |
-| `query_string` | boolean | false        | `true`        |
+| Name                | Type    | Nullifiable? | Default value |
+| ------------------- | ------- | ------------ | ------------- |
+| `query_string`      | boolean | false        | `true`        |
+| `restricted_values` | array   | true         | `null`        |
+
+#### Structure of `restricted_values` key
+
+If present, the value of `restricted_values` is an array where each item contains a hash with those params:
+
+| Name          | Type   | Nullifiable? | Default value |
+| ------------- | ------ | ------------ | ------------- |
+| `title`       | string | false        | `""`          |
+| `description` | string | true         | `null`        |
+| `value`       |        | false        |               |
 
 #### String length
 
@@ -137,16 +147,6 @@ If specified, the attribute's value MUST match the JavaScript Pattern production
 | ------ | ------ | ------------ | ------------- |
 | `min`  | number | true         | `null`        |
 | `max`  | number | true         | `null`        |
-
-### Structure of `restricted_values` key
-
-If present, the value of `restricted_values` is an array where each item contains a hash with those params:
-
-| Name          | Type   | Nullifiable? | Default value |
-| ------------- | ------ | ------------ | ------------- |
-| `title`       | string | false        | `""`          |
-| `description` | string | true         | `null`        |
-| `value`       |        | false        |               |
 
 ## Example
 
@@ -216,20 +216,6 @@ Content-Language: en
                 "state": {
                     "type": "string",
                     "description": "Indicates the state of the issue.",
-                    "restricted_values": [
-                        {
-                            "value": "open",
-                            "title": "Open"
-                        },
-                        {
-                            "value": "closed",
-                            "title": "Closed"
-                        },
-                        {
-                            "value": "all",
-                            "title": "All"
-                        }
-                    ],
                     "nullifiable": false
                 }
             }
