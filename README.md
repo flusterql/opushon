@@ -14,7 +14,7 @@ This is a work in progress, largely influenced by [Zac Stewart](https://github.c
 
 ## Status of This Document
 
-Draft v0.1.0.
+Draft v0.2.0.
 
 ## Copyright Notice
 
