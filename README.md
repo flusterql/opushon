@@ -20,7 +20,7 @@ Draft.
 
 Copyright (c) 2014 Cyril Wack.  All rights reserved.
 
-* * *
+***
 
 ## Introduction
 
@@ -84,7 +84,7 @@ And where `examples` is such as:
 | `input`  |      | true         | `null`        |
 | `output` |      | true         | `null`        |
 
-* * *
+***
 
 ## Parameters
 
