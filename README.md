@@ -14,7 +14,7 @@ This is a work in progress, largely influenced by [Zac Stewart](https://github.c
 
 ## Status of This Document
 
-Draft.
+Draft v0.1.0.
 
 ## Copyright Notice
 
@@ -67,28 +67,22 @@ An option object MUST have the following members:
 | ------------- | ------ | ------------ | ------------- |
 | `title`       | string | false        | `""`          |
 | `description` | string | false        | `""`          |
-| `parameters`  | hash   | false        | `{}`          |
-| `examples`    | hash   | false        | `{}`          |
+| `request`     | hash   | false        | `{}`          |
+| `response`    | hash   | false        | `{}`          |
 
-Where `parameters` is such as:
+Where `request` and `response` are such as:
 
-| Name     | Type | Nullifiable? | Default value |
-| -------- | ---- | ------------ | ------------- |
-| `input`  | hash | true         | `null`        |
-| `output` | hash | true         | `null`        |
-
-And where `examples` is such as:
-
-| Name     | Type | Nullifiable? | Default value |
-| -------- | ---- | ------------ | ------------- |
-| `input`  |      | true         | `null`        |
-| `output` |      | true         | `null`        |
+| Name            | Type | Nullifiable? | Default value |
+| --------------- | ---- | ------------ | ------------- |
+| `headers`       | hash | false        | `{}`          |
+| `query_string`  | hash | false        | `{}`          |
+| `body`          | hash | false        | `{}`          |
 
 ***
 
 ## Parameters
 
-Both **query string** and **body** params MUST be described with the keys below. When a key is missing, its default value is assigned.
+The content of **headers**, **query string** and **body** params MUST be described with the keys below. When a key is missing, its default value is assigned.
 
 | Name                | Type    | Nullifiable? | Default value |
 | ------------------- | ------- | ------------ | ------------- |
@@ -96,23 +90,10 @@ Both **query string** and **body** params MUST be described with the keys below.
 | `description`       | string  | false        | `""`          |
 | `type`              | string  | false        | `"string"`    |
 | `nullifiable`       | boolean | false        | `true`        |
-
-Constraint validation: allowed values of `type` are:
-
-* `"string"`,
-* `"number"`,
-* `"boolean"`,
-* `"array"`,
-* `"hash"`.
-
-### Input Constraints
-
-| Name                | Type    | Nullifiable? | Default value |
-| ------------------- | ------- | ------------ | ------------- |
-| `query_string`      | boolean | false        | `true`        |
 | `restricted_values` | array   | true         | `null`        |
+| `example`           |         | true         | `null`        |
 
-#### Structure of `restricted_values` key
+### Restricted values
 
 If present, the value of `restricted_values` is an array where each item contains a hash with those params:
 
@@ -122,16 +103,28 @@ If present, the value of `restricted_values` is an array where each item contain
 | `description` | string | false        | `""`          |
 | `value`       |        | false        |               |
 
-#### String length
+### Types of value
+
+Allowed values for `type` are:
+
+* `"string"`,
+* `"number"`,
+* `"boolean"`,
+* `"array"`,
+* `"hash"`.
+
+#### Constraints of value
+
+##### String's length
 
 | Name     | Type   | Nullifiable? | Default value |
 | -------- | ------ | ------------ | ------------- |
 | `minlen` | number | true         | `null`        |
 | `maxlen` | number | true         | `null`        |
 
-Constraint validation: if minlen and maxlen are present and their values are both not null, then the value of minlen MUST be less than the value of maxlen.
+Constraint validation: if `minlen` and `maxlen` are present and their values are both not null, then the value of `minlen` MUST be less than the value of `maxlen`.
 
-#### String pattern
+##### String's pattern
 
 The pattern attribute specifies a regular expression against which the control's value.
 
@@ -141,7 +134,7 @@ If specified, the attribute's value MUST match the JavaScript Pattern production
 | --------- | ------ | ------------ | ------------- |
 | `pattern` | string | true         | `null`        |
 
-#### Number range
+##### Number's range
 
 | Name   | Type   | Nullifiable? | Default value |
 | ------ | ------ | ------------ | ------------- |
@@ -164,8 +157,17 @@ Content-Language: en
     "GET": {
         "title": "List issues",
         "description": "List all issues across all the authenticated user's visible repositories.",
-        "parameters": {
-            "input": {
+        "request": {
+            "headers": {
+                "Auth-Token": {
+                    "type": "string",
+                    "description": "Authentication Token.",
+                    "nullifiable": false,
+                    "minlen": 32,
+                    "example": null
+                }
+            },
+            "query_string": {
                 "page": {
                     "type": "number",
                     "description": "Identify the page to return.",
@@ -197,61 +199,68 @@ Content-Language: en
                     "nullifiable": true
                 }
             },
-            "output": {
+            "body": {}
+        },
+        "response": {
+            "headers": {},
+            "query_string": {},
+            "body": {
                 "created_at": {
                     "type": "string",
                     "description": "The datetime that the resource was created at.",
-                    "nullifiable": false
+                    "nullifiable": false,
+                    "example": "2014-01-01T01:01:01Z"
                 },
                 "title": {
                     "type": "string",
                     "description": "The title of the resource.",
-                    "nullifiable": false
+                    "nullifiable": false,
+                    "example": "Found a bug"
                 },
                 "body": {
                     "type": "string",
                     "description": "The body of the resource.",
-                    "nullifiable": true
+                    "nullifiable": true,
+                    "example": "I'm having a problem with this."
                 },
                 "state": {
                     "type": "string",
                     "description": "Indicates the state of the issue.",
-                    "nullifiable": false
+                    "nullifiable": false,
+                    "example": "open"
                 }
             }
-        },
-        "examples": {
-            "input": null,
-            "output": [
-                {
-                    "created_at": "2014-01-01T01:01:01Z",
-                    "title": "Found a bug",
-                    "body": "I'm having a problem with this.",
-                    "state": "open"
-                }
-            ]
         }
     },
     "POST": {
         "title": "Create an issue",
         "description": "Any user with pull access to a repository can create an issue.",
-        "parameters": {
-            "input": {
+        "request": {
+            "headers": {
+                "Auth-Token": {
+                    "type": "string",
+                    "description": "Authentication Token.",
+                    "nullifiable": false,
+                    "minlen": 32,
+                    "example": null
+                }
+            },
+            "query_string": {},
+            "body": {
                 "title": {
-                    "query_string": false,
                     "type": "string",
                     "description": "Issue title.",
                     "maxlen": 255,
-                    "nullifiable": false
+                    "nullifiable": false,
+                    "example": "Found a bug"
                 },
                 "body": {
-                    "query_string": false,
                     "type": "string",
                     "description": "Issue body.",
-                    "nullifiable": true
+                    "nullifiable": true,
+                    "example": "I'm having a problem with this."
                 },
                 "labels": {
-                    "query_string": false,
                     "type": "string",
                     "description": "Labels to associate with this issue.",
                     "nullifiable": true,
@@ -268,41 +277,44 @@ Content-Language: en
                             "value": "label_3",
                             "title": "Elixir"
                         }
+                    ],
+                    "example": [
+                        "label_1",
+                        "label_2"
                     ]
                 }
-            },
-            "output": null
+            }
         },
-        "examples": {
-            "input": {
-                "title": "Found a bug",
-                "body": "I'm having a problem with this.",
-                "labels": [
-                    "label_1",
-                    "label_2"
-                ]
-            },
-            "output": null
+        "response": {
+            "headers": {},
+            "query_string": {},
+            "body": {}
         }
     },
     "DELETE": {
         "title": "Delete issues",
         "description": "Remove every issues.",
-        "parameters": {
-            "input": null,
-            "output": null
+        "request": {
+            "headers": {
+                "Auth-Token": {
+                    "type": "string",
+                    "description": "Authentication Token.",
+                    "nullifiable": false,
+                    "minlen": 32,
+                    "example": null
+                }
+            },
+            "query_string": {},
+            "body": {}
         },
-        "examples": {
-            "input": null,
-            "output": null
+        "response": {
+            "headers": {},
+            "query_string": {},
+            "body": {}
         }
     }
 }
 ```
-
-## Limitations
-
-In input parameters, a query string parameter and a body parameter cannot have the same name because of the structure of data (which is a hash).
 
 ## References
 
