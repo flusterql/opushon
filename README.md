@@ -70,13 +70,20 @@ An option object MUST have the following members:
 | `request`     | hash   | false        | `{}`          |
 | `response`    | hash   | false        | `{}`          |
 
-Where `request` and `response` are such as:
+Where `request` is such as:
 
-| Name            | Type | Nullifiable? | Default value |
-| --------------- | ---- | ------------ | ------------- |
-| `headers`       | hash | false        | `{}`          |
-| `query_string`  | hash | false        | `{}`          |
-| `body`          | hash | false        | `{}`          |
+| Name           | Type | Nullifiable? | Default value |
+| -------------- | ---- | ------------ | ------------- |
+| `headers`      | hash | false        | `{}`          |
+| `query_string` | hash | false        | `{}`          |
+| `body`         | hash | false        | `{}`          |
+
+And `response` is such as:
+
+| Name      | Type | Nullifiable? | Default value |
+| --------- | ---- | ------------ | ------------- |
+| `headers` | hash | false        | `{}`          |
+| `body`    | hash | false        | `{}`          |
 
 ***
 
