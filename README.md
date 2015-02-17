@@ -14,7 +14,7 @@ This is a work in progress, largely influenced by [Zac Stewart](https://github.c
 
 ## Status of This Document
 
-Draft v0.2.0.
+Draft v0.2.1.
 
 ## Copyright Notice
 
@@ -118,7 +118,8 @@ Allowed values for `type` are:
 * `"number"`,
 * `"boolean"`,
 * `"array"`,
-* `"hash"`.
+* `"hash"`.,
+* `"file"`.
 
 #### Constraints of value
 
