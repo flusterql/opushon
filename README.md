@@ -14,7 +14,7 @@ This is a work in progress, largely influenced by [Zac Stewart](https://github.c
 
 ## Status of This Document
 
-Draft v0.2.1.
+Draft v0.2.2.
 
 ## Copyright Notice
 
@@ -36,11 +36,11 @@ For example, consider a response that indicates the communication options of a u
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [[RFC2119](https://www.ietf.org/rfc/rfc2119.txt)].
 
-## The Options Structure JSON Object
+## How to serve Opushon documents
 
-The canonical model for problem details is a JSON [[RFC7159](http://tools.ietf.org/html/rfc7159)] object.
+Opushon has a media type for both the JSON and YAML variants, whos names are "application/opushon+json" and "application/opushon+yaml" respectively.
 
-When serialised as a JSON document, that format SHOULD be identified with the "application/json" media type.
+When serving Opushon over HTTP, the Content-Type of the response SHOULD contain the relevant media type name.
 
 ## Structure of the document
 
