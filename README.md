@@ -1,5 +1,7 @@
 # Opushon
 
+> Representation of documentations for HTTP APIs.
+
 ## Abstract
 
 This document extend HTTP by defining through the HTTP OPTIONS method a structure for response body that include information about the communication options, to determine the options and/or requirements associated with a resource.
@@ -30,7 +32,7 @@ This specification defines simple JSON [[RFC7159](http://tools.ietf.org/html/rfc
 
 Thus, API clients can be informed of both the resource fields and the constraints of those fields, per method.
 
-For example, consider a response that indicates the communication options of a user resource. If its Allow header field contains GET and POST, the body of the response should respectivelly inform the client about the fields that it is able to get, and the fields that it is able to post, with if needed some constraints such as the type of value.
+For example, consider a response that indicates the communication options of a user resource. If its Allow header field contains GET and POST, the body of the response should respectively inform the client about the fields that it is able to get, and the fields that it is able to post, with if needed some constraints such as the type of value.
 
 ## Requirements
 
