@@ -40,7 +40,16 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 
 ## How to serve Opushon documents
 
-Opushon has a media type for both the JSON and YAML variants, whos names are "application/opushon+json" and "application/opushon+yaml" respectively.
+Opushon has a media type for both the JSON and YAML variants.
+
+Some examples of possible mime type definitions:
+
+    application/json
+    application/vnd.example+json
+    application/opushon+json
+    application/yaml
+    application/vnd.example+yaml
+    application/opushon+yaml
 
 When serving Opushon over HTTP, the Content-Type of the response SHOULD contain the relevant media type name.
 
