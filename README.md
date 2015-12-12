@@ -129,7 +129,7 @@ Allowed values for `type` are:
 * `"number"`,
 * `"boolean"`,
 * `"array"`,
-* `"hash"`.,
+* `"hash"`,
 * `"file"`.
 
 #### Constraints of value
