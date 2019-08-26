@@ -20,7 +20,7 @@ Draft v0.2.2.
 
 ## Copyright Notice
 
-Copyright (c) 2014 Cyril Wack.  All rights reserved.
+Copyright (c) 2014 Cyril Kato.  All rights reserved.
 
 ***
 
